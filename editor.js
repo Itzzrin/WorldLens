@@ -273,7 +273,7 @@ const volumeSlider = document.getElementById("volumeSlider");
 const volumeBtn = document.getElementById("volumeBtn");
 const fullscreenBtn = document.getElementById("fullscreenBtn");
 const timeDisplay = document.getElementById("timeDisplay");
-const videoContainer = video.parentNode;
+const videoContainer = document.getElementById("videoContainer");
 
 function formatTime(seconds) {
   const mins = Math.floor(seconds / 60);

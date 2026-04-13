@@ -363,6 +363,13 @@
   gap: 8px;
 }
 
+#videoContainer:fullscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+}
+
 @media (max-width: 600px) {
   .time-display {
     font-size: 11px;
