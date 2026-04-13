@@ -4,18 +4,15 @@ const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d", { willReadFrequently: true });
 let animationFrame;
 let isFilterActive = false;
-const videoWrapper = document.getElementById("videoWrapper");
 
 function toggleFilter(element) {
   const filter = element.getAttribute('data-filter');
 
-  // Si ya hay un filtro seleccionado y es el mismo, lo deseleccionamos
   if (selectedFilter === filter) {
     // Deseleccionar
     selectedFilter = null;
     element.classList.remove('selected');
   } else {
-    // Si hay otro filtro seleccionado, lo deseleccionamos
     if (selectedFilter) {
       const previousElement = document.querySelector(`.filter-option[data-filter="${selectedFilter}"]`);
       if (previousElement) {
@@ -23,13 +20,9 @@ function toggleFilter(element) {
       }
     }
 
-    // Seleccionar el nuevo filtro
     selectedFilter = filter;
     element.classList.add('selected');
   }
-
-  //updateActiveFilters();
-  //updateFilterCount();
   applyFilters();
 }
 
@@ -90,7 +83,7 @@ function applyFilters() {
 
     case 'filter1': // desenfoque
       video.style.filter =
-        "blur(6px)";
+        "blur(4px)";
     break;
 
     case 'filter2': // verde
@@ -111,58 +104,15 @@ function applyFilters() {
 
 }
 
-function pixelate(ctx) {
-
-  const pixelSize = 15;
-
-  const w = ctx.canvas.width;
-  const h = ctx.canvas.height;
-
-  const tempCanvas = document.createElement("canvas");
-  const tempCtx = tempCanvas.getContext("2d");
-
-  tempCanvas.width = w / pixelSize;
-  tempCanvas.height = h / pixelSize;
-
-  tempCtx.drawImage(
-    video,
-    0,
-    0,
-    tempCanvas.width,
-    tempCanvas.height
-  );
-
-  ctx.imageSmoothingEnabled = false;
-
-  ctx.drawImage(
-    tempCanvas,
-    0,
-    0,
-    tempCanvas.width,
-    tempCanvas.height,
-    0,
-    0,
-    w,
-    h
-  );
-
-  ctx.imageSmoothingEnabled = true;
-}
-
 function startPixelatedEffect() {
 
   if (!video.videoWidth) {
-
     setTimeout(
       startPixelatedEffect,
       100
     );
-
     return;
-
   }
-
-  /* crear canvas */
 
   const canvas =
     document.createElement("canvas");
@@ -177,8 +127,6 @@ function startPixelatedEffect() {
 
   canvas.height =
     video.videoHeight;
-
-  /* poner encima del video */
 
   canvas.style.position = "absolute";
 
@@ -239,21 +187,15 @@ function startPixelatedEffect() {
       canvas.width,
       canvas.height
     );
-
     ctx.imageSmoothingEnabled =
       true;
-
     if (selectedFilter === 'filter4') {
-
       animationFrame =
         requestAnimationFrame(
           processFrame
         );
-
     }
-
   }
-
   processFrame();
 
 }
@@ -295,7 +237,6 @@ const playPauseBtn = document.getElementById("playPauseBtn");
 const progressBar = document.getElementById("progressBar");
 const volumeSlider = document.getElementById("volumeSlider");
 const volumeBtn = document.getElementById("volumeBtn");
-const fullscreenBtn = document.getElementById("fullscreenBtn");
 const timeDisplay = document.getElementById("timeDisplay");
 const videoContainer = document.getElementById("videoContainer");
 
@@ -337,14 +278,13 @@ volumeBtn.addEventListener("click", () => {
   }
 });
 
-fullscreenBtn.addEventListener("click", () => {
-  if (!document.fullscreenElement) {
-    videoContainer.requestFullscreen();
-    fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
-  } else {
-    document.exitFullscreen();
-    fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
-  }
+const loadingOverlay =
+  document.getElementById("loadingOverlay");
+video.addEventListener("loadstart", () => {
+  loadingOverlay.style.display = "flex";
+});
+video.addEventListener("canplay", () => {
+  loadingOverlay.style.display = "none";
 });
 
 document.addEventListener('DOMContentLoaded', function () {
