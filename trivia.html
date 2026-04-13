@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WordLens - Trivia Mundialista</title>
+    <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="trivia.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <h1><i class="fas fa-globe-americas"></i> WordLens Trivia</h1>
+    </header>
+
+    <main class="app">
+      <div class="trivia-header">
+        <button class="back-btn" onclick="goTo('index.html')">
+          <i class="fas fa-arrow-left"></i> Volver al inicio
+        </button>
+        <h2>Trivia del Mundial</h2>
+      </div>
+
+      <div id="quizContainer" class="quiz-container">
+        <!-- Aquí se cargarán las preguntas dinámicamente -->
+      </div>
+
+      <div id="resultContainer" class="result-container hidden">
+        <h3>Resultado</h3>
+        <p id="scoreText"></p>
+        <div class="button-group">
+          <button class="primary" onclick="restartQuiz()">Reintentar</button>
+          <button class="secondary" onclick="goTo('index.html')">
+            Volver al inicio
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script src="common.js"></script>
+    <script src="trivia.js"></script>
+  </body>
+</html>

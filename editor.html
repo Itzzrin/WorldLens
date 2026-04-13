@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WordLens - Editor de Video</title>
+  <link rel="stylesheet" href="common.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="editor.css" />
+</head>
+
+<body>
+  <header class="header">
+    <h1><i class="fas fa-globe-americas"></i> WordLens</h1>
+  </header>
+
+  <main class="app">
+    <!-- EDITOR -->
+    <div class="editor-header">
+      <button class="back-btn" onclick="goTo('video-select.html')">
+        <i class="fas fa-arrow-left"></i> Volver
+      </button>
+      <h2>Editor de video</h2>
+    </div>
+
+    <div class="editor-content">
+      <div class="video-section">
+        <div class="video-player">
+          <video id="selectedVideo" controls playsinline webkit-playsinline x5-playsinline preload="metadata">
+            <source src="" type="video/mp4" />
+            Tu navegador no soporta video.
+          </video>
+        </div>
+        <p class="video-title">
+          Video seleccionado: <span id="videoTitle">Cargando...</span>
+        </p>
+      </div>
+
+      <div class="filters-section">
+        <h3><i class="fas fa-sliders-h"></i> Filtros disponibles</h3>
+        <p class="section-subtitle">
+          Selecciona uno o más filtros para aplicar
+        </p>
+
+        <div class="filters">
+          <div class="filter-option" onclick="toggleFilter(this)" data-filter="filter1">
+            <div class="filter-preview filter1"></div>
+            <span>Desenfoque</span>
+          </div>
+          <div class="filter-option" onclick="toggleFilter(this)" data-filter="filter2">
+            <div class="filter-preview filter2"></div>
+            <span>Tinte verde</span>
+          </div>
+          <div class="filter-option" onclick="toggleFilter(this)" data-filter="filter3">
+            <div class="filter-preview filter3"></div>
+            <span>Alta saturación</span>
+          </div>
+          <div class="filter-option" onclick="toggleFilter(this)" data-filter="filter4">
+            <div class="filter-preview filter4"></div>
+            <span>Pixeleado</span>
+          </div>
+        </div>
+
+        <div class="selected-filters">
+          <h4>Filtros seleccionados: <span id="filterCount">0</span></h4>
+          <div id="activeFilters" class="active-filters">
+            <!-- Filtros activos aparecerán aquí -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="editor.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+html{
+  background-color: rgba(15, 15, 22, 0.9);
+}
+
+body {
+  background: linear-gradient(135deg, #0b0b10 0%, #151522 100%);
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  padding: 1.2rem 1rem;
+  text-align: center;
+  background: rgba(15, 15, 22, 0.9);
+  border-bottom: 1px solid #2a2a3a;
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* APP CONTAINER */
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .app {
+    max-width: 900px;
+    padding: 0 2rem;
+  }
+}
+
+/* BOTONES */
+button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+.primary {
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 14px;
+  border: none;
+  font-size: 1rem;
+  flex: 1;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.primary:hover {
+  background: linear-gradient(90deg, #2563eb, #4f46e5);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+}
+
+.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 14px;
+  border: 1px solid #3b82f6;
+  font-size: 1rem;
+  flex: 1;
+}
+
+.secondary:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.back-btn {
+  background: none;
+  color: #9ca3af;
+  border: none;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-btn:hover {
+  color: #3b82f6;
+}
+
+.primary-btn {
+  display: block;
+  width: calc(100% - 2rem);
+  margin: 1rem auto;
+  padding: 1.2rem;
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  flex-shrink: 0;
+}
+
+.primary-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary-btn.disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+/* UTILIDADES */
+.hidden {
+  display: none !important;
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  }
+  50% { 
+    box-shadow: 0 4px 25px rgba(59, 130, 246, 0.7);
+  }
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+.primary-btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}

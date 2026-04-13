@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WordLens - Escáner</title>
+    <link rel="stylesheet" href="common.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="scanner.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+        }
+      }
+    </script>
+    <!-- En tu archivo HTML, antes de cargar scanner.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1><i class="fas fa-globe-americas"></i> WordLens</h1>
+    </header>
+
+    <main class="app">
+      <div class="scanner-header">
+        <button class="back-btn" onclick="goTo('index.html')">
+          <i class="fas fa-arrow-left"></i> Volver
+        </button>
+        <h2>Escáner AR de Banderas</h2>
+      </div>
+
+      <!-- Contenedor principal de la cámara -->
+      <canvas id="captureCanvas" style="display:none;"></canvas>
+      <div class="camera-container">
+        <div id="cameraView" class="camera-view">
+          <!-- Video de la cámara real -->
+          <video id="cameraStream" autoplay playsinline muted></video>
+          <!-- Overlay con gradiente y modelo 3D -->
+          <div class="camera-overlay">
+            <div id="ar-model-container" class="ar-model-container">
+              <!-- El modelo 3D se insertará aquí con Three.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel de información -->
+        <div id="infoPanel" class="info-panel hidden">
+          <div class="info-header">
+            <h3 id="bandera"><i class="fas fa-flag"></i> México 🇲🇽</h3>
+            <span class="champion-badge">
+              <i class="fas fa-star"></i> País Anfitrión 2026
+            </span>
+          </div>
+          <div class="info-content">
+            <p id="infoPais">
+              La selección mexicana es una de las más representativas de la
+              CONCACAF y una de las pocas selecciones que han participado en
+              todos los Mundiales. En 2026, México será país anfitrión y sede de
+              múltiples partidos.
+            </p>
+            <div class="stats">
+              <div class="stat">
+                <span class="stat-value" id="participaciones">17</span>
+                <span class="stat-label">Participaciones</span>
+              </div>
+              <div class="stat">
+                <span class="stat-value" id="mejorRes">Cuartos</span>
+                <span class="stat-label">Mejor resultado</span>
+              </div>
+              <div class="stat">
+                <span class="stat-value" id="confederacion">CONCACAF</span>
+                <span class="stat-label">Confederación</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles del escáner -->
+      <div class="scanner-controls">
+        <button disabled class="control-btn" onclick="toggleInfo()" id="toggleInfoBtn">
+          <i class="fas fa-info-circle"></i> Mostrar información
+        </button>
+        <button disabled
+          class="control-btn"
+          onclick="toggleAnimation()"
+          id="toggleAnimBtn"
+        >
+          <i class="fas fa-play"></i> Animar bandera
+        </button>
+      </div>
+    </main>
+    <script src="common.js"></script>
+    <script src="scanner.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WordLens - Seleccionar Video</title>
+    <link rel="stylesheet" href="common.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="video-select.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1><i class="fas fa-globe-americas"></i> WordLens</h1>
+    </header>
+
+    <main class="app">
+      <div class="video-select-header">
+        <button class="back-btn" onclick="goTo('index.html')">
+          <i class="fas fa-arrow-left"></i> Volver
+        </button>
+        <h2>Selecciona un video</h2>
+      </div>
+
+      <div class="video-select-content">
+        <div class="video-grid">
+          <!-- Video 1 -->
+          <div
+            class="video-thumb"
+            onclick="selectVideo(this)"
+            data-video-src="https://res.cloudinary.com/dmx4kc4hu/video/upload/v1776106950/Intro_Copa_del_mundo_2026_ws8jsw.mp4"
+            data-title="Intro Copa del mundo 2026"
+          >
+            <img
+              src="videos/thumbs/Intro Copa del mundo 2026.png"
+              alt="Intro Copa del mundo 2026"
+              onerror="
+                this.style.display = 'none';
+                this.parentNode.classList.add('no-thumb');
+              "
+            />
+            <div class="video-overlay">
+              <i class="fas fa-play-circle"></i>
+              <span>Intro</span>
+            </div>
+            <div class="video-duration">0:24</div>
+          </div>
+          <!-- Video 2 -->
+          <div
+            class="video-thumb"
+            onclick="selectVideo(this)"
+            data-video-src="https://res.cloudinary.com/dmx4kc4hu/video/upload/v1776106908/Presentacion_World_Cup_2026_thkunf.mp4"
+            data-title="Presentacion World Cup 2026"
+          >
+            <img
+              src="videos/thumbs/Presentacion World Cup 2026.png"
+              alt="Presentacion World Cup 2026"
+              onerror="
+                this.style.display = 'none';
+                this.parentNode.classList.add('no-thumb');
+              "
+            />
+            <div class="video-overlay">
+              <i class="fas fa-play-circle"></i>
+              <span>Presentacion
+              </span>
+            </div>
+            <div class="video-duration">0:16</div>
+          </div>
+          <!-- Video 3 -->
+          <div
+            class="video-thumb"
+            onclick="selectVideo(this)"
+            data-video-src="https://res.cloudinary.com/dmx4kc4hu/video/upload/v1776106912/Mascotas_World_Cup_2026_njzzpm.mp4"
+            data-title="Mascotas World Cup 2026"
+          >
+           <img
+              src="videos/thumbs/Mascotas World Cup 2026.png"
+              alt="Mascotas World Cup 2026"
+              onerror="
+                this.style.display = 'none';
+                this.parentNode.classList.add('no-thumb');
+              "
+            />
+            <div class="video-overlay">
+              <i class="fas fa-play-circle"></i>
+              <span>Mascotas</span>
+            </div>
+            <div class="video-duration">1:05</div>
+          </div>
+          <!-- Video 4 -->
+          <div
+            class="video-thumb"
+            onclick="selectVideo(this)"
+            data-video-src="https://res.cloudinary.com/dmx4kc4hu/video/upload/v1776106915/This_is_FIFA_World_Cup_26_m7do6i.mp4"
+            data-title="This is FIFA World Cup 26"
+          >
+           <img
+              src="videos/thumbs/This is FIFA World Cup 26.png"
+              alt="This is FIFA World Cup 2026"
+              onerror="
+                this.style.display = 'none';
+                this.parentNode.classList.add('no-thumb');
+              "
+            />
+            <div class="video-overlay">
+              <i class="fas fa-play-circle"></i>
+              <span>This is FIFA</span>
+            </div>
+            <div class="video-duration">0:54</div>
+          </div>
+          <!-- Video 5 -->
+          <div
+            class="video-thumb"
+            onclick="selectVideo(this)"
+            data-video-src="https://res.cloudinary.com/dmx4kc4hu/video/upload/v1776106912/WeAre26_FIFA_World_Cup_26_uihere.mp4"
+            data-title="WeAre26 FIFA World Cup 26"
+          >
+           <img
+              src="videos/thumbs/WeAre26 FIFA World Cup 26.png"
+              alt="WeAre26 FIFA World Cup 2026"
+              onerror="
+                this.style.display = 'none';
+                this.parentNode.classList.add('no-thumb');
+              "
+            />
+            <div class="video-overlay">
+              <i class="fas fa-play-circle"></i>
+              <span>#WeAre26 FIFA</span>
+            </div>
+            <div class="video-duration">1:00</div>
+          </div>
+          <!-- Video 6 -->
+          <div
+            class="video-thumb"
+            onclick="selectVideo(this)"
+            data-video-src="https://res.cloudinary.com/dmx4kc4hu/video/upload/v1776106914/Mexico_City_-_FIFA_World_Cup_2026_ii77ao.mp4"
+            data-title="Mexico City - FIFA World Cup 2026"
+          >
+           <img
+              src="videos/thumbs/Mexico City - FIFA World Cup 2026.png"
+              alt="Mexico City - FIFA World Cup 2026"
+              onerror="
+                this.style.display = 'none';
+                this.parentNode.classList.add('no-thumb');
+              "
+            />
+            <div class="video-overlay">
+              <i class="fas fa-play-circle"></i>
+              <span>Mexico City</span>
+            </div>
+            <div class="video-duration">1:42</div>
+          </div>
+        </div>
+
+        <button
+          id="editBtn"
+          class="primary-btn disabled"
+          onclick="goToEditor()"
+        >
+          <i class="fas fa-edit"></i> Editar video seleccionado
+        </button>
+      </div>
+    </main>
+
+    <script src="common.js"></script>
+    <script src="video-select.js"></script>
+  </body>
+</html>
