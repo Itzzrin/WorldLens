@@ -27,8 +27,8 @@ function toggleFilter(element) {
     element.classList.add('selected');
   }
 
-  updateActiveFilters();
-  updateFilterCount();
+  //updateActiveFilters();
+  //updateFilterCount();
   applyFilters();
 }
 
@@ -175,8 +175,8 @@ function removeFilter(filter) {
       filterElement.classList.remove('selected');
     }
 
-    updateActiveFilters();
-    updateFilterCount();
+    //updateActiveFilters();
+    //updateFilterCount();
     applyFilters();
   }
 }
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(() => { window.location.href = 'video-select.html'; }, 2000);
   }
 
-  updateFilterCount();
+  //updateFilterCount();
 
   window.addEventListener('beforeunload', cleanupFilters);
 });
