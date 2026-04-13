@@ -71,76 +71,44 @@ function updateFilterCount() {
 }
 
 function applyFilters() {
-
   if (animationFrame) {
     cancelAnimationFrame(animationFrame);
+    animationFrame = null;
   }
 
-  const displayCanvas = document.getElementById("displayCanvas");
-  const displayCtx = displayCanvas.getContext("2d");
+  video.style.filter = "none";
 
-  function processFrame() {
+  const oldCanvas = document.getElementById("displayCanvas");
 
-    if (video.videoWidth === 0) {
-      animationFrame = requestAnimationFrame(processFrame);
-      return;
-    }
+  if (oldCanvas) {
+    oldCanvas.remove();
+  }
 
-    displayCanvas.width = video.videoWidth;
-    displayCanvas.height = video.videoHeight;
+  if (!selectedFilter) return;
 
-    displayCtx.drawImage(
-      video,
-      0,
-      0,
-      displayCanvas.width,
-      displayCanvas.height
-    );
+  switch (selectedFilter) {
 
-    switch (selectedFilter) {
+    case 'filter1': // desenfoque
+      video.style.filter =
+        "blur(6px)";
+    break;
 
-      case 'filter1': // blur
+    case 'filter2': // verde
+      video.style.filter =
+        "sepia(100%) hue-rotate(50deg) saturate(300%)";
+    break;
 
-        displayCtx.filter = "blur(6px)";
-        displayCtx.drawImage(video, 0, 0);
-        displayCtx.filter = "none";
+    case 'filter3': // saturación
+      video.style.filter =
+        "saturate(300%) contrast(120%)";
+    break;
 
-      break;
-
-      case 'filter2': // verde
-
-        displayCtx.filter =
-          "sepia(100%) hue-rotate(50deg) saturate(300%)";
-
-        displayCtx.drawImage(video, 0, 0);
-        displayCtx.filter = "none";
-
-      break;
-
-      case 'filter3': // saturación
-
-        displayCtx.filter =
-          "saturate(300%) contrast(120%)";
-
-        displayCtx.drawImage(video, 0, 0);
-        displayCtx.filter = "none";
-
-      break;
-
-      case 'filter4': // pixelado
-
-        pixelate(displayCtx);
-
-      break;
-
-    }
-
-    animationFrame =
-      requestAnimationFrame(processFrame);
+    case 'filter4': // pixelado
+      startPixelatedEffect();
+    break;
 
   }
 
-  processFrame();
 }
 
 function pixelate(ctx) {
@@ -182,56 +150,112 @@ function pixelate(ctx) {
 }
 
 function startPixelatedEffect() {
-  if (!video.videoWidth || !video.videoHeight) {
-    setTimeout(startPixelatedEffect, 100);
+
+  if (!video.videoWidth) {
+
+    setTimeout(
+      startPixelatedEffect,
+      100
+    );
+
     return;
+
   }
 
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
+  /* crear canvas */
+
+  const canvas =
+    document.createElement("canvas");
+
+  canvas.id = "displayCanvas";
+
+  const ctx =
+    canvas.getContext("2d");
+
+  canvas.width =
+    video.videoWidth;
+
+  canvas.height =
+    video.videoHeight;
+
+  /* poner encima del video */
+
+  canvas.style.position = "absolute";
+
+  canvas.style.top = "0";
+  canvas.style.left = "0";
+
+  canvas.style.width = "100%";
+
+  canvas.style.pointerEvents = "none";
+
+  video.parentNode.appendChild(canvas);
 
   function processFrame() {
-    if (video.paused || video.ended) {
-      animationFrame = requestAnimationFrame(processFrame);
-      return;
-    }
 
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
 
-    // Aplicar efecto pixelado
     const pixelSize = 15;
-    const smallWidth = Math.max(1, Math.floor(canvas.width / pixelSize));
-    const smallHeight = Math.max(1, Math.floor(canvas.height / pixelSize));
 
-    ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, smallWidth, smallHeight);
-    ctx.drawImage(canvas, 0, 0, smallWidth, smallHeight, 0, 0, canvas.width, canvas.height);
-    ctx.imageSmoothingEnabled = true;
+    const smallWidth =
+      Math.floor(
+        canvas.width / pixelSize
+      );
 
-    // Mostrar el canvas
-    let displayCanvas = document.getElementById('displayCanvas');
-    if (!displayCanvas) {
-      displayCanvas = document.createElement('canvas');
-      displayCanvas.id = 'displayCanvas';
-      displayCanvas.width = canvas.width;
-      displayCanvas.height = canvas.height;
-      displayCanvas.style.width = '100%';
-      displayCanvas.style.maxWidth = '800px';
-      videoWrapper.appendChild(displayCanvas);
-    }
+    const smallHeight =
+      Math.floor(
+        canvas.height / pixelSize
+      );
 
-    const displayCtx = displayCanvas.getContext('2d');
-    displayCtx.drawImage(canvas, 0, 0, displayCanvas.width, displayCanvas.height);
+    ctx.imageSmoothingEnabled =
+      false;
 
-    // Solo continuar si este filtro sigue seleccionado
+    ctx.drawImage(
+      canvas,
+      0,
+      0,
+      canvas.width,
+      canvas.height,
+      0,
+      0,
+      smallWidth,
+      smallHeight
+    );
+
+    ctx.drawImage(
+      canvas,
+      0,
+      0,
+      smallWidth,
+      smallHeight,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    ctx.imageSmoothingEnabled =
+      true;
+
     if (selectedFilter === 'filter4') {
-      animationFrame = requestAnimationFrame(processFrame);
+
+      animationFrame =
+        requestAnimationFrame(
+          processFrame
+        );
+
     }
+
   }
 
   processFrame();
+
 }
 
 function removeFilter(filter) {
