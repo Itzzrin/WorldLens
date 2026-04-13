@@ -59,10 +59,6 @@ function getFilterName(filter) {
   }
 }
 
-function updateFilterCount() {
-  document.getElementById('filterCount').textContent = selectedFilter ? 1 : 0;
-}
-
 function applyFilters() {
   if (animationFrame) {
     cancelAnimationFrame(animationFrame);
@@ -235,8 +231,6 @@ function cleanupFilters() {
 
 const playPauseBtn = document.getElementById("playPauseBtn");
 const progressBar = document.getElementById("progressBar");
-const volumeSlider = document.getElementById("volumeSlider");
-const volumeBtn = document.getElementById("volumeBtn");
 const timeDisplay = document.getElementById("timeDisplay");
 const videoContainer = document.getElementById("videoContainer");
 
@@ -265,19 +259,6 @@ progressBar.addEventListener("input", () => {
   video.currentTime = (progressBar.value / 100) * video.duration;
 });
 
-volumeSlider.addEventListener("input", () => {
-  video.volume = volumeSlider.value;
-});
-
-volumeBtn.addEventListener("click", () => {
-  video.muted = !video.muted;
-  if (video.muted) {
-    volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-  } else {
-    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-  }
-});
-
 const loadingOverlay =
   document.getElementById("loadingOverlay");
 video.addEventListener("loadstart", () => {
@@ -285,6 +266,19 @@ video.addEventListener("loadstart", () => {
 });
 video.addEventListener("canplay", () => {
   loadingOverlay.style.display = "none";
+});
+
+function updateMuteIcon() {
+  if (video.muted) {
+    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+  } else {
+    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+  }
+}
+
+muteBtn.addEventListener("click", () => {
+  video.muted = !video.muted;
+  updateMuteIcon();
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -321,8 +315,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   video.parentNode.style.position = "relative";
   video.parentNode.appendChild(displayCanvas);
-
-  //updateFilterCount();
 
   window.addEventListener('beforeunload', cleanupFilters);
 });
