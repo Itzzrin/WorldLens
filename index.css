@@ -258,3 +258,77 @@
   margin-right: 0.4rem;
   color: #ffffff;
 }
+
+.hero-card {
+  position: relative;
+}
+
+.info-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.info-btn:hover {
+  background: #00c3ff;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #1e1e2f;
+  padding: 20px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 800px;
+  height: 70%;
+  color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-container {
+  flex: 1;
+  margin-top: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.pdf-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.modal-actions {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}

@@ -48,3 +48,18 @@ function removeFilter(filter) {
     if (typeof updateFilterCount !== 'undefined') updateFilterCount();
   }
 }
+
+function openManual() {
+  document.getElementById("manualModal").classList.remove("hidden");
+}
+
+function closeManual() {
+  document.getElementById("manualModal").classList.add("hidden");
+}
+
+function downloadManual() {
+  const link = document.createElement("a");
+  link.href = "Manual de Usuario - WordLens.pdf"; // asegúrate de tener el PDF
+  link.download = "Manual de Usuario - WordLens.pdf";
+  link.click();
+}

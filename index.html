@@ -18,23 +18,50 @@
   <main class="app">
     <div class="home-content">
       <!-- HERO -->
-      <div class="hero-card">
-        <span class="tag"><i class="fas fa-trophy"></i> Mundial de Fútbol</span>
-        <h2>Explora el fútbol<br />como nunca antes</h2>
-        <p>
-          Escanea 12 distintas banderas en tiempo real, descubre información interactiva y
-          visualiza modelos 3D relacionados con el Mundial.
-        </p>
+        <div class="hero-card">
+          <span class="tag"
+            ><i class="fas fa-trophy"></i> Mundial de Fútbol</span
+          >
+          <div class="info-btn" onclick="openManual()">
+  <i class="fas fa-info-circle"></i>
+</div>
+          <h2>Explora el fútbol<br />como nunca antes</h2>
+          <p>
+            Escanea 12 distintas banderas en tiempo real, descubre información interactiva y
+            visualiza modelos 3D relacionados con el Mundial.
+          </p>
 
-        <div class="hero-actions">
-          <button class="primary pulse" onclick="goTo('scanner.html')">
-            <i class="fas fa-camera"></i> Escanear Bandera
-          </button>
-          <button class="secondary" onclick="goTo('video-select.html')">
-            <i class="fas fa-film"></i> Editar Videos
-          </button>
+          <div class="hero-actions">
+            <button class="primary pulse" onclick="goTo('scanner.html')">
+              <i class="fas fa-camera"></i> Escanear Bandera
+            </button>
+            <button class="secondary" onclick="goTo('video-select.html')">
+              <i class="fas fa-film"></i> Editar Videos
+            </button>
+          </div>
         </div>
-      </div>
+
+        <div id="manualModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeManual()">&times;</span>
+
+    <h2>Manual de Usuario</h2>
+
+    <!-- Vista previa del PDF -->
+    <div class="pdf-container">
+      <iframe 
+        src="Manual de Usuario - WordLens.pdf" 
+        frameborder="0">
+      </iframe>
+    </div>
+
+    <div class="modal-actions">
+      <button class="primary" onclick="downloadManual()">
+        <i class="fas fa-download"></i> Descargar Manual
+      </button>
+    </div>
+  </div>
+</div>
 
       <!-- Botón para trivia -->
       <div style="text-align: center; margin: 1rem 0 2rem">
