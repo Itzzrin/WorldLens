@@ -190,130 +190,16 @@ function loadModel(country) {
       const box = new THREE.Box3().setFromObject(model);
       const size = box.getSize(new THREE.Vector3()).length();
       const center = box.getCenter(new THREE.Vector3());
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      3.32
       
       const scale = 1.5 / size;
       model.scale.set(scale, scale, scale);
 
-      // Reposicionar para que quede centrado
       model.position.set(
         -center.x * scale,
         -center.y * scale,
         -center.z * scale,
       );
 
-      // Si tiene animaciones, prepararlas
       if (gltf.animations && gltf.animations.length > 0) {
         mixer = new THREE.AnimationMixer(model);
         const action = mixer.clipAction(gltf.animations[0]);
@@ -437,7 +323,7 @@ function startRealScan() {
 
     lastClass = detectedClass;
     console.log("Clase detectada:", detectedClass, "Probabilidad:", highestProb.toFixed(2));
-    if (highestProb > 0.70 && stableCount > 3 && detectedClass !== "NoFlag") {
+    if (highestProb > 0.70 && stableCount > 2 && detectedClass !== "NoFlag") {
 
       toggleInfoBtn.disabled = false;
       toggleAnimBtn.disabled = false;
