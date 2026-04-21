@@ -278,17 +278,19 @@
   background: #00c3ff;
 }
 
+/* Estilos para el modal mejorado en móviles */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.85);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  backdrop-filter: blur(5px);
 }
 
 .hidden {
@@ -299,57 +301,82 @@
   background: #1e1e2f;
   padding: 20px;
   border-radius: 15px;
-  width: 80%;
+  width: 90%;
   max-width: 800px;
-  height: 70%;
+  height: 85%;
   color: white;
   position: relative;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.modal-content h2 {
+  margin: 0 0 15px 0;
+  font-size: 1.3rem;
+  padding-right: 30px;
 }
 
 .pdf-container {
   flex: 1;
   margin-top: 10px;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: auto;
+  background: #fff;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pdf-container iframe {
   width: 100%;
   height: 100%;
   border: none;
+  min-height: 500px;
 }
 
 .modal-actions {
-  margin-top: 10px;
+  margin-top: 15px;
   text-align: right;
 }
 
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 15px;
+  right: 20px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  transition: all 0.3s;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
 }
 
+.close-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+/* Estilos específicos para móviles */
 @media (max-width: 768px) {
   .modal {
-    align-items: flex-start;
-    padding-top: 20px;
-    overflow-y: auto;
+    align-items: center;
+    padding: 10px;
   }
   
   .modal-content {
     width: 95%;
     height: 90%;
-    margin: 10px auto;
+    margin: 0 auto;
     padding: 15px;
   }
   
   .modal-content h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 10px;
   }
   
@@ -363,39 +390,69 @@
   .pdf-container iframe {
     width: 100%;
     height: 100%;
-    min-height: 500px;
+    min-height: 400px;
   }
   
   .modal-actions {
-    margin-top: 10px;
+    margin-top: 12px;
     text-align: center;
   }
   
   .modal-actions button {
     width: 100%;
     padding: 12px;
+    font-size: 0.9rem;
   }
   
   .close-btn {
-    top: 5px;
-    right: 10px;
+    top: 8px;
+    right: 12px;
     font-size: 24px;
+    width: 32px;
+    height: 32px;
   }
 }
-
 
 @media (max-width: 480px) {
   .modal-content {
     width: 98%;
-    height: 95%;
-    padding: 10px;
+    height: 92%;
+    padding: 12px;
   }
   
   .modal-content h2 {
     font-size: 1rem;
   }
   
-  .pdf-container iframe {
-    min-height: 400px;
+  .pdf-container {
+    border-radius: 8px;
   }
+  
+  .pdf-container iframe {
+    min-height: 350px;
+  }
+  
+  .modal-actions button {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+}
+
+.pdf-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.pdf-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.pdf-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.pdf-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
