@@ -26,39 +26,6 @@ function toggleFilter(element) {
   applyFilters();
 }
 
-function updateActiveFilters() {
-  const container = document.getElementById('activeFilters');
-  container.innerHTML = '';
-
-  if (selectedFilter) {
-    const filterName = getFilterName(selectedFilter);
-    const tag = document.createElement('div');
-    tag.className = 'filter-tag';
-    tag.innerHTML = `
-      ${filterName}
-      <button onclick="removeFilter('${selectedFilter}')">
-        <i class="fas fa-times"></i>
-      </button>
-    `;
-    container.appendChild(tag);
-  }
-}
-
-function getFilterName(filter) {
-  switch (filter) {
-    case 'filter1':
-      return 'Desenfoque';
-    case 'filter2':
-      return 'Tinte Verde';
-    case 'filter3':
-      return 'Alta saturación';
-    case 'filter4':
-      return 'Pixeleado';
-    default:
-      return filter;
-  }
-}
-
 function applyFilters() {
   if (animationFrame) {
     cancelAnimationFrame(animationFrame);
@@ -66,7 +33,6 @@ function applyFilters() {
   }
 
   video.style.filter = "none";
-
   const oldCanvas = document.getElementById("displayCanvas");
 
   if (oldCanvas) {
@@ -206,9 +172,6 @@ function removeFilter(filter) {
     if (filterElement) {
       filterElement.classList.remove('selected');
     }
-
-    //updateActiveFilters();
-    //updateFilterCount();
     applyFilters();
   }
 }
