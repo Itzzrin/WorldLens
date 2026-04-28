@@ -3,19 +3,17 @@ const allQuestions = [
 
   // ===== MÉXICO (20 preguntas) =====
   {
-    // Pregunta específica al Azteca, sin ambigüedad
     question: "¿Cómo se llama el estadio de la Ciudad de México que será sede del Mundial 2026?",
     options: ["Estadio Azteca", "Estadio Aztlán", "Estadio Olímpico Universitario", "Foro Sol"],
     correct: 0
   },
   {
-    // Monterrey tiene el BBVA como sede confirmada
+
     question: "¿Cómo se llama el estadio de Monterrey que será sede del Mundial 2026?",
     options: ["Estadio BBVA", "Estadio Universitario", "Estadio Tecnológico", "Estadio Olímpico"],
     correct: 0
   },
   {
-    // Guadalajara tiene el Estadio Akron como sede confirmada
     question: "¿Cómo se llama el estadio de Guadalajara que será sede del Mundial 2026?",
     options: ["Estadio Akron", "Estadio Jalisco", "Estadio Chivas", "Estadio Verde Valle"],
     correct: 0

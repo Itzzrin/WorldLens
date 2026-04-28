@@ -190,3 +190,7 @@ button:active {
   pointer-events: none;
   cursor: not-allowed;
 }
+
+h3 a{
+  Color: white;
+}
