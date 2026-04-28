@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>WordLens - Estadísticas Mundialistas</title>
+    <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="estadisticas.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <h1><i class="fas fa-globe-americas"></i> WordLens</h1>
+    </header>
+
+    <main class="stats-container">
+      <div class="stats-title">
+        <button class="back-btn" onclick="goTo('index.html')">
+          <i class="fas fa-arrow-left"></i> Volver
+        </button>
+        <h2>
+          <i class="fas fa-chart-line"></i> Rendimiento de los 12 participantes
+        </h2>
+        <p>
+          Datos históricos, mundiales y ranking FIFA de las selecciones
+          destacadas
+        </p>
+      </div>
+      <div id="statsGrid" class="stats-grid">
+        <!-- Las tarjetas se llenan con JavaScript -->
+      </div>
+    </main>
+
+    <script src="estadisticas.js"></script>
+    <script>
+      // Si se requiere algún helper extra, asegurar que el back-home funcione consistentemente
+      if (typeof window.goTo === "undefined") {
+        window.goTo = function (page) {
+          window.location.href = page;
+        };
+      }
+    </script>
+  </body>
+</html>
