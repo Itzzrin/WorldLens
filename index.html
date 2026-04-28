@@ -1,131 +1,125 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WordLens - Inicio</title>
-    <link rel="stylesheet" href="common.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="index.css" />
-  </head>
-  <body>
-    <header class="header">
-      <h1><i class="fas fa-globe-americas"></i> WordLens</h1>
-    </header>
 
-    <main class="app">
-      <div class="home-content">
-        <!-- HERO -->
-        <div class="hero-card">
-          <span class="tag"
-            ><i class="fas fa-trophy"></i> Mundial de Fútbol</span
-          >
-          <div class="info-btn" onclick="openManual()">
-  <i class="fas fa-info-circle"></i>
-</div>
-          <h2>Explora el fútbol<br />como nunca antes</h2>
-          <p>
-            Escanea 12 distintas banderas en tiempo real, descubre información interactiva y
-            visualiza modelos 3D relacionados con el Mundial.
-          </p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WordLens - Inicio</title>
+  <link rel="stylesheet" href="common.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="index.css" />
+</head>
 
-          <div class="hero-actions">
-            <button class="primary pulse" onclick="goTo('scanner.html')">
-              <i class="fas fa-camera"></i> Escanear Bandera
-            </button>
-            <button class="secondary" onclick="goTo('video-select.html')">
-              <i class="fas fa-film"></i> Editar Videos
-            </button>
-          </div>
-          <div class="scroll-participants" onclick="scrollToParticipants()">
-              <span>Ver participantes</span>
-              <i class="fas fa-arrow-down"></i>
-            </div>
+<body>
+  <header class="header">
+    <h1><i class="fas fa-globe-americas"></i> WordLens</h1>
+  </header>
+
+  <main class="app">
+    <div class="home-content">
+      <!-- HERO -->
+      <div class="hero-card">
+        <span class="tag"><i class="fas fa-trophy"></i> Mundial de Fútbol</span>
+        <div class="info-btn" onclick="openManual()">
+          <i class="fas fa-info-circle"></i>
         </div>
+        <h2>Explora el fútbol<br />como nunca antes</h2>
+        <p>
+          Escanea 12 distintas banderas en tiempo real, descubre información interactiva y
+          visualiza modelos 3D relacionados con el Mundial.
+        </p>
 
-        <div id="manualModal" class="modal hidden">
-  <div class="manual-viewer">
-
-    <!-- Header del visor -->
-    <div class="manual-header">
-      <div class="manual-title">
-        <i class="fas fa-book-open"></i>
-        <span>Manual de Usuario</span>
-      </div>
-      <div class="manual-header-actions">
-        <button class="manual-icon-btn" onclick="downloadManual()" title="Descargar">
-          <i class="fas fa-download"></i>
-        </button>
-        <button class="manual-icon-btn manual-close" onclick="closeManual()" title="Cerrar">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Área de renderizado -->
-    <div class="manual-body" id="manualBody">
-      <!-- Estado de carga -->
-      <div class="manual-loading" id="manualLoading">
-        <div class="loading-spinner"></div>
-        <p>Cargando manual...</p>
-      </div>
-      <!-- Error state -->
-      <div class="manual-error hidden" id="manualError">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p>No se pudo cargar el manual.</p>
-        <button class="primary" onclick="downloadManual()">
-          <i class="fas fa-download"></i> Descargar en su lugar
-        </button>
-      </div>
-      <!-- Canvas donde se pinta cada página -->
-      <div id="canvasWrapper" class="canvas-wrapper">
-        <canvas id="pdfCanvas" class="pdf-canvas hidden"></canvas>
-      </div>
-    </div>
-
-    <!-- Barra de zoom -->
-    <div class="manual-zoom-bar">
-      <button class="manual-nav-btn" id="btnZoomOut" onclick="pdfZoomOut()" title="Alejar">
-        <i class="fas fa-search-minus"></i>
-      </button>
-      <span class="zoom-level" id="zoomLevel">100%</span>
-      <button class="manual-nav-btn" id="btnZoomIn" onclick="pdfZoomIn()" title="Acercar">
-        <i class="fas fa-search-plus"></i>
-      </button>
-      <button class="manual-nav-btn zoom-reset" id="btnZoomReset" onclick="pdfZoomReset()" title="Restablecer zoom">
-        <i class="fas fa-compress-arrows-alt"></i>
-      </button>
-    </div>
-
-    <!-- Footer de navegación de páginas -->
-    <div class="manual-footer">
-      <button class="manual-nav-btn" id="btnPrev" onclick="pdfPrevPage()" disabled>
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <span class="manual-page-info" id="pdfPageInfo">— / —</span>
-      <button class="manual-nav-btn" id="btnNext" onclick="pdfNextPage()" disabled>
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    </div>
-
-  </div>
-</div>
-
-        <!-- Botón para trivia -->
-        <div style="text-align: center; margin: 1rem 0 2rem">
-          <button
-            class="primary pulse"
-            onclick="goTo('trivia.html')"
-            style="width: auto; padding: 1rem 2rem"
-          >
-            <i class="fas fa-question-circle"></i> Jugar Trivia Mundialista
+        <div class="hero-actions">
+          <button class="primary pulse" onclick="goTo('scanner.html')">
+            <i class="fas fa-camera"></i> Escanear Bandera
+          </button>
+          <button class="secondary" onclick="goTo('video-select.html')">
+            <i class="fas fa-film"></i> Editar Videos
           </button>
         </div>
+        <div class="scroll-participants" onclick="scrollToParticipants()">
+          <span>Ver participantes</span>
+          <i class="fas fa-arrow-down"></i>
+        </div>
+      </div>
 
-              <!-- VIDEO TUTORIAL -->
+      <div id="manualModal" class="modal hidden">
+        <div class="manual-viewer">
+
+          <!-- Header del visor -->
+          <div class="manual-header">
+            <div class="manual-title">
+              <i class="fas fa-book-open"></i>
+              <span>Manual de Usuario</span>
+            </div>
+            <div class="manual-header-actions">
+              <button class="manual-icon-btn" onclick="downloadManual()" title="Descargar">
+                <i class="fas fa-download"></i>
+              </button>
+              <button class="manual-icon-btn manual-close" onclick="closeManual()" title="Cerrar">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Área de renderizado -->
+          <div class="manual-body" id="manualBody">
+            <!-- Estado de carga -->
+            <div class="manual-loading" id="manualLoading">
+              <div class="loading-spinner"></div>
+              <p>Cargando manual...</p>
+            </div>
+            <!-- Error state -->
+            <div class="manual-error hidden" id="manualError">
+              <i class="fas fa-exclamation-triangle"></i>
+              <p>No se pudo cargar el manual.</p>
+              <button class="primary" onclick="downloadManual()">
+                <i class="fas fa-download"></i> Descargar en su lugar
+              </button>
+            </div>
+            <!-- Canvas donde se pinta cada página -->
+            <div id="canvasWrapper" class="canvas-wrapper">
+              <canvas id="pdfCanvas" class="pdf-canvas hidden"></canvas>
+            </div>
+          </div>
+
+          <!-- Barra de zoom -->
+          <div class="manual-zoom-bar">
+            <button class="manual-nav-btn" id="btnZoomOut" onclick="pdfZoomOut()" title="Alejar">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <span class="zoom-level" id="zoomLevel">100%</span>
+            <button class="manual-nav-btn" id="btnZoomIn" onclick="pdfZoomIn()" title="Acercar">
+              <i class="fas fa-search-plus"></i>
+            </button>
+            <button class="manual-nav-btn zoom-reset" id="btnZoomReset" onclick="pdfZoomReset()"
+              title="Restablecer zoom">
+              <i class="fas fa-compress-arrows-alt"></i>
+            </button>
+          </div>
+
+          <!-- Footer de navegación de páginas -->
+          <div class="manual-footer">
+            <button class="manual-nav-btn" id="btnPrev" onclick="pdfPrevPage()" disabled>
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="manual-page-info" id="pdfPageInfo">— / —</span>
+            <button class="manual-nav-btn" id="btnNext" onclick="pdfNextPage()" disabled>
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Botón para trivia -->
+      <div style="text-align: center; margin: 1rem 0 2rem">
+        <button class="primary pulse" onclick="goTo('trivia.html')" style="width: auto; padding: 1rem 2rem">
+          <i class="fas fa-question-circle"></i> Jugar Trivia Mundialista
+        </button>
+      </div>
+
+      <!-- VIDEO TUTORIAL -->
       <div class="video-tutorial" id="videoTutorial">
         <div class="tutorial-header">
           <h3><i class="fas fa-play-circle"></i> Video Tutorial</h3>
@@ -135,10 +129,11 @@
         </div>
         <div class="video-content" id="videoContent">
           <div class="video-container">
-            <video controls
-              playsinline
+            <video controls playsinline
               poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%231a1a2e'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23666' font-size='1.5' dy='.3em'%3ETutorial%3C/text%3E%3C/svg%3E">
-              <source src="https://res.cloudinary.com/dmx4kc4hu/video/upload/v1776113385/5d34a237-0826-4a31-9308-c178919f3585_mfchi0.mp4" type="video/mp4">
+              <source
+                src="https://res.cloudinary.com/dmx4kc4hu/video/upload/v1776113385/5d34a237-0826-4a31-9308-c178919f3585_mfchi0.mp4"
+                type="video/mp4">
               Tu navegador no soporta el elemento de video.
             </video>
           </div>
@@ -146,110 +141,87 @@
         </div>
       </div>
 
-        <!-- FEATURES -->
-        <div class="features">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-eye"></i>
-            </div>
-            <h3>Reconocimiento visual</h3>
-            <p>Identifica banderas desde la cámara en tiempo real.</p>
+      <!-- FEATURES -->
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-eye"></i>
           </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-cube"></i>
-            </div>
-            <h3>Modelos 3D</h3>
-            <p>
-              Visualiza elementos interactivos relacionados con cada selección.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-video"></i>
-            </div>
-            <h3>Edición de video</h3>
-            <p>Aplica filtros a videos temáticos del Mundial.</p>
-          </div>
+          <h3>Reconocimiento visual</h3>
+          <p>Identifica banderas desde la cámara en tiempo real.</p>
         </div>
 
-        <!-- INFO SECTION con botón de trivia y ajustes -->
-        <div class="info-section">
-          <h3><i class="fas fa-question-circle"></i> ¿Cómo funciona?</h3>
-          <ol>
-            <li>
-              <i class="fas fa-mobile-alt"></i> Abre el escáner desde tu celular
-            </li>
-            <li>
-              <i class="fas fa-flag"></i> Apunta a una bandera de un país que
-              participe en el Mundial 2026 (México, Estados Unidos, Canadá, y
-              otros invitados)
-            </li>
-            <li>
-              <i class="fas fa-cube"></i> Explora información y modelos 3D
-            </li>
-            <li>
-              <i class="fas fa-edit"></i> Edita videos desde la misma plataforma
-            </li>
-          </ol>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-cube"></i>
+          </div>
+          <h3>Modelos 3D</h3>
+          <p>
+            Visualiza elementos interactivos relacionados con cada selección.
+          </p>
         </div>
 
-        <!-- Índice de banderas de apoyo -->
-        <div class="info-section" id="participants-section">
-          <h3>
-            <i class="fas fa-flag"></i> Índice de banderas participantes (Sede
-            México 2026)
-          </h3>
-          <div class="flag-index">
-            <span class="flag-item"
-              ><span class="flag-emoji">🇲🇽</span> México</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇿🇦</span> Sudáfrica</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇰🇷</span> Corea del Sur</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇺🇦</span> Ucrania</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇹🇳</span> Túnez</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇺🇿</span> Uzbekistán</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇨🇴</span> Colombia</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇯🇵</span> Japón</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇨🇻</span> Cabo Verde</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇸🇦</span> Arabia Saudí</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇪🇸</span> España</span
-            >
-            <span class="flag-item"
-              ><span class="flag-emoji">🇨🇿</span> República Checa</span
-            >
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-video"></i>
           </div>
-          <div style="text-align: center; margin-top: 1.8rem;">
-            <button class="primary pulse" onclick="goTo('estadisticas.html')">
-              <i class="fas fa-chart-line"></i> Ver estadísticas
-            </button>
-          </div>
+          <h3>Edición de video</h3>
+          <p>Aplica filtros a videos temáticos del Mundial.</p>
         </div>
       </div>
-    </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="common.js"></script>
-    <script src="home.js"></script>
+      <!-- INFO SECTION con botón de trivia y ajustes -->
+      <div class="info-section">
+        <h3><i class="fas fa-question-circle"></i> ¿Cómo funciona?</h3>
+        <ol>
+          <li>
+            <i class="fas fa-mobile-alt"></i> Abre el escáner desde tu celular
+          </li>
+          <li>
+            <i class="fas fa-flag"></i> Apunta a una bandera de un país que
+            participe en el Mundial 2026 (México, Estados Unidos, Canadá, y
+            otros invitados)
+          </li>
+          <li>
+            <i class="fas fa-cube"></i> Explora información y modelos 3D
+          </li>
+          <li>
+            <i class="fas fa-edit"></i> Edita videos desde la misma plataforma
+          </li>
+        </ol>
+      </div>
+
+      <!-- Índice de banderas de apoyo -->
+      <div class="info-section" id="participants-section">
+        <h3>
+          <i class="fas fa-flag"></i> Índice de banderas participantes (Sede
+          México 2026)
+        </h3>
+        <div class="flag-index">
+          <span class="flag-item"><span class="flag-emoji">🇲🇽</span> México</span>
+          <span class="flag-item"><span class="flag-emoji">🇿🇦</span> Sudáfrica</span>
+          <span class="flag-item"><span class="flag-emoji">🇰🇷</span> Corea del Sur</span>
+          <span class="flag-item"><span class="flag-emoji">🇺🇦</span> Ucrania</span>
+          <span class="flag-item"><span class="flag-emoji">🇹🇳</span> Túnez</span>
+          <span class="flag-item"><span class="flag-emoji">🇺🇿</span> Uzbekistán</span>
+          <span class="flag-item"><span class="flag-emoji">🇨🇴</span> Colombia</span>
+          <span class="flag-item"><span class="flag-emoji">🇯🇵</span> Japón</span>
+          <span class="flag-item"><span class="flag-emoji">🇨🇻</span> Cabo Verde</span>
+          <span class="flag-item"><span class="flag-emoji">🇸🇦</span> Arabia Saudí</span>
+          <span class="flag-item"><span class="flag-emoji">🇪🇸</span> España</span>
+          <span class="flag-item"><span class="flag-emoji">🇨🇿</span> República Checa</span>
+        </div>
+        <div style="text-align: center; margin-top: 1.8rem;">
+          <button class="primary pulse" onclick="goTo('estadisticas.html')">
+            <i class="fas fa-chart-line"></i> Ver estadísticas
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="common.js"></script>
+  <script src="home.js"></script>
+
 </html>
