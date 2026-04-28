@@ -53,7 +53,7 @@ function removeFilter(filter) {
 //  PDF VIEWER — zoom + pan con CSS transform (sin re-render en caliente)
 // ════════════════════════════════════════════════════════════════
 
-const PDF_URL   = 'Manual de Usuario - WordLens.pdf';
+const PDF_URL   = 'Manual de Usuario - WorldLens.pdf';
 const ZOOM_MIN  = 1;      // no permitir zoom out por debajo del ajuste al ancho
 const ZOOM_MAX  = 5;
 const ZOOM_STEP = 0.4;
@@ -344,7 +344,7 @@ function closeManual() {
 function downloadManual() {
   const link = document.createElement('a');
   link.href     = PDF_URL;
-  link.download = 'Manual de Usuario - WordLens.pdf';
+  link.download = 'Manual de Usuario - WorldLens.pdf';
   link.click();
 }
 

@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <div class="stat-note">
-                    <i class="fas fa-chart-simple"></i> Datos actualizados - WordLens
+                    <i class="fas fa-chart-simple"></i> Datos actualizados - WorldLens
                 </div>
             `;
             gridContainer.appendChild(card);
