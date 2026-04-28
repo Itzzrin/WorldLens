@@ -31,39 +31,6 @@ function toggleFilter(element) {
   applyFilters();
 }
 
-function updateActiveFilters() {
-  const container = document.getElementById('activeFilters');
-  container.innerHTML = '';
-
-  if (selectedFilter) {
-    const filterName = getFilterName(selectedFilter);
-    const tag = document.createElement('div');
-    tag.className = 'filter-tag';
-    tag.innerHTML = `
-      ${filterName}
-      <button onclick="removeFilter('${selectedFilter}')">
-        <i class="fas fa-times"></i>
-      </button>
-    `;
-    container.appendChild(tag);
-  }
-}
-
-function getFilterName(filter) {
-  switch (filter) {
-    case 'filter1':
-      return 'Desenfoque';
-    case 'filter2':
-      return 'Tinte Verde';
-    case 'filter3':
-      return 'Alta saturación';
-    case 'filter4':
-      return 'Pixeleado';
-    default:
-      return filter;
-  }
-}
-
 function applyFilters() {
   if (animationFrame) {
     cancelAnimationFrame(animationFrame);
@@ -71,7 +38,6 @@ function applyFilters() {
   }
 
   video.style.filter = "none";
-
   const oldCanvas = document.getElementById("displayCanvas");
 
   if (oldCanvas) {
@@ -110,13 +76,13 @@ function applyFilters() {
       startPixelatedEffect();
       break;
 
-    case 'filter5':
+    case 'filter5': // Cámara térmica
       advancedControls.style.display = "block";
       sliderLabel.textContent = "Intensidad Térmica";
       video.style.filter = `invert(${value}%) hue-rotate(250deg) saturate(200%) contrast(150%)`;
       break;
 
-    case 'filter6':
+    case 'filter6': // Ruido
       advancedControls.style.display = "block";
       sliderLabel.textContent = "Intensidad de Ruido";
       startNoiseEffect();
@@ -127,98 +93,42 @@ function applyFilters() {
 
 function startPixelatedEffect() {
 
-  if (!video.videoWidth) {
-    setTimeout(
-      startPixelatedEffect,
-      100
-    );
+  if (!video.videoWidth) { 
+    setTimeout(startPixelatedEffect, 100);
     return;
   }
-
-  const canvas =
-    document.createElement("canvas");
-
+  let canvas = document.getElementById("displayCanvas");
+  if (!canvas) {
+  canvas = document.createElement("canvas");
   canvas.id = "displayCanvas";
-
-  const ctx =
-    canvas.getContext("2d");
-
-  canvas.width =
-    video.videoWidth;
-
-  canvas.height =
-    video.videoHeight;
-
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
   canvas.style.position = "absolute";
-
   canvas.style.top = "0";
   canvas.style.left = "0";
-
   canvas.style.width = "100%";
-
   canvas.style.pointerEvents = "none";
-
   video.parentNode.appendChild(canvas);
+  }
+  const ctx = canvas.getContext("2d");
+  canvas.width = video.videoWidth; 
+  canvas.height = video.videoHeight;
 
   function processFrame() {
 
-    ctx.drawImage(
-      video,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
+    ctx.drawImage( video, 0, 0, canvas.width, canvas.height);
     const pixelSize = 15;
-
-    const smallWidth =
-      Math.floor(
-        canvas.width / pixelSize
-      );
-
-    const smallHeight =
-      Math.floor(
-        canvas.height / pixelSize
-      );
-
-    ctx.imageSmoothingEnabled =
-      false;
-
-    ctx.drawImage(
-      canvas,
-      0,
-      0,
-      canvas.width,
-      canvas.height,
-      0,
-      0,
-      smallWidth,
-      smallHeight
-    );
-
-    ctx.drawImage(
-      canvas,
-      0,
-      0,
-      smallWidth,
-      smallHeight,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-    ctx.imageSmoothingEnabled =
-      true;
+    const smallWidth = Math.floor( canvas.width / pixelSize);
+    const smallHeight = Math.floor(canvas.height / pixelSize);
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, smallWidth, smallHeight);
+    ctx.drawImage( canvas, 0, 0, smallWidth, smallHeight, 0, 0, canvas.width, canvas.height);
+    ctx.imageSmoothingEnabled = true;
     if (selectedFilter === 'filter4') {
-      animationFrame =
-        requestAnimationFrame(
-          processFrame
-        );
+      animationFrame = requestAnimationFrame(processFrame);
     }
   }
   processFrame();
-
 }
 
 function startNoiseEffect() {
@@ -226,7 +136,6 @@ function startNoiseEffect() {
     setTimeout(startNoiseEffect, 100);
     return;
   }
-
   let noiseCanvas = document.getElementById("displayCanvas");
   if (!noiseCanvas) {
     noiseCanvas = document.createElement("canvas");
@@ -242,44 +151,33 @@ function startNoiseEffect() {
   }
 
   const nCtx = noiseCanvas.getContext("2d", { willReadFrequently: true });
-  // Bajamos un poco la resolución del canvas de ruido para crear "grano" más grueso
   noiseCanvas.width = video.videoWidth / 1.5; 
   noiseCanvas.height = video.videoHeight / 1.5;
-
   let frameCount = 0;
 
   function processFrame() {
     if (selectedFilter !== 'filter6') return;
-
-    // Solo actualizamos el ruido cada 2 frames para que se vea más como cine
     if (frameCount % 2 === 0) {
-      const intensity = intensitySlider.value; //
+      const intensity = intensitySlider.value; 
       const w = noiseCanvas.width;
       const h = noiseCanvas.height;
-
       nCtx.clearRect(0, 0, w, h);
-
       const imageData = nCtx.createImageData(w, h);
       const data = imageData.data;
 
       for (let i = 0; i < data.length; i += 4) {
-        // Generamos un valor de gris
-        const value = Math.random() * 255;
-        
+        const value = Math.random() * 255;    
         data[i] = value;     // Rojo
         data[i + 1] = value; // Verde
         data[i + 2] = value; // Azul
-        // La opacidad depende del slider y de un factor aleatorio para dar textura
         data[i + 3] = Math.random() * (intensity * 0.8); 
       }
 
       nCtx.putImageData(imageData, 0, 0);
     }
-
     frameCount++;
     animationFrame = requestAnimationFrame(processFrame);
   }
-
   processFrame();
 }
 
@@ -293,9 +191,6 @@ function removeFilter(filter) {
     if (filterElement) {
       filterElement.classList.remove('selected');
     }
-
-    //updateActiveFilters();
-    //updateFilterCount();
     applyFilters();
   }
 }

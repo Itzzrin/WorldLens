@@ -245,18 +245,6 @@ function animate() {
   }
 }
 
-// Funciones de los botones
-function toggleInfo() {
-  isInfoVisible = !isInfoVisible;
-  cameraView.classList.toggle("compact", isInfoVisible);
-  infoPanel.classList.toggle("hidden", !isInfoVisible);
-  toggleInfoBtn.innerHTML = isInfoVisible
-    ? '<i class="fas fa-times-circle"></i> Cerrar información'
-    : '<i class="fas fa-info-circle"></i> Mostrar información';
-
-  smoothResize();
-}
-
 function smoothResize() {
   let startTime = null;
   const duration = 500; // 500ms que coincide con la transición CSS
@@ -276,6 +264,18 @@ function smoothResize() {
   requestAnimationFrame(animateResize);
 }
 
+
+// Funciones de los botones
+function toggleInfo() {
+  isInfoVisible = !isInfoVisible;
+  cameraView.classList.toggle("compact", isInfoVisible);
+  infoPanel.classList.toggle("hidden", !isInfoVisible);
+  toggleInfoBtn.innerHTML = isInfoVisible
+    ? '<i class="fas fa-times-circle"></i> Cerrar información'
+    : '<i class="fas fa-info-circle"></i> Mostrar información';
+
+  smoothResize();
+}
 function toggleAnimation() {
   isAnimated = !isAnimated;
   toggleAnimBtn.innerHTML = isAnimated
@@ -291,7 +291,6 @@ function toggleScan() {
 }
 
 function startRealScan() {
-  console.log("Iniciando escaneo en tiempo real");
   let lastClass = "";
   let stableCount = 0;
   let lastProcessedCountry = "";
