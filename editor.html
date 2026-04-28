@@ -72,10 +72,6 @@
             <div class="filter-preview filter1"></div>
             <span>Desenfoque</span>
           </div>
-          <div class="filter-option" onclick="toggleFilter(this)" data-filter="filter2">
-            <div class="filter-preview filter2"></div>
-            <span>Tinte verde</span>
-          </div>
           <div class="filter-option" onclick="toggleFilter(this)" data-filter="filter3">
             <div class="filter-preview filter3"></div>
             <span>Alta saturación</span>
@@ -83,6 +79,28 @@
           <div class="filter-option" onclick="toggleFilter(this)" data-filter="filter4">
             <div class="filter-preview filter4"></div>
             <span>Pixeleado</span>
+          </div>
+          <div class="filter-option" onclick="toggleFilter(this)" data-filter="filter2">
+            <div class="filter-preview filter2"></div>
+            <span>Tinte</span>
+          </div>
+          <div class="filter-option" onclick="toggleFilter(this)" data-filter="filter5">
+            <div class="filter-preview filter5"></div>
+            <span>Cámara térmica</span>
+          </div>
+          <div class="filter-option" onclick="toggleFilter(this)" data-filter="filter6">
+            <div class="filter-preview filter6"></div>
+            <span>Ruido</span>
+          </div>
+          <div id="advanced-controls" class="advanced-panel" style="display: none;">
+            <div class="panel-header">
+              <span id="slider-label">Ajuste de Intensidad</span>
+            </div>
+            <div class="slider-wrapper">
+              <i class="fas fa-minus"></i>
+              <input type="range" id="filter-intensity" min="0" max="100" value="20" class="mobile-slider">
+              <i class="fas fa-plus"></i>
+            </div>
           </div>
         </div>
 

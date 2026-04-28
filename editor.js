@@ -4,6 +4,11 @@ const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d", { willReadFrequently: true });
 let animationFrame;
 let isFilterActive = false;
+const intensitySlider = document.getElementById('filter-intensity');
+const advancedControls = document.getElementById('advanced-controls');
+const sliderLabel = document.getElementById('slider-label');
+
+intensitySlider.addEventListener('input', applyFilters);
 
 function toggleFilter(element) {
   const filter = element.getAttribute('data-filter');
@@ -39,29 +44,49 @@ function applyFilters() {
     oldCanvas.remove();
   }
 
-  if (!selectedFilter) return;
+  if (!selectedFilter) {
+    advancedControls.style.display = "none";
+    return;
+  }
+
+  const value = intensitySlider.value;
 
   switch (selectedFilter) {
 
     case 'filter1': // desenfoque
-      video.style.filter =
-        "blur(4px)";
-    break;
+      advancedControls.style.display = "none";
+      video.style.filter = "blur(4px)";
+      break;
 
     case 'filter2': // verde
-      video.style.filter =
-        "sepia(100%) hue-rotate(50deg) saturate(300%)";
-    break;
+      advancedControls.style.display = "block";
+      sliderLabel.textContent = "Cambiar Color";
+      const hueValue = value * 3.6;
+      Math.floor(hueValue);
+      video.style.filter = `sepia(100%) hue-rotate(${hueValue}deg) saturate(300%)`;
+      break;
 
     case 'filter3': // saturación
-      video.style.filter =
-        "saturate(300%) contrast(120%)";
-    break;
+      advancedControls.style.display = "none";
+      video.style.filter = "saturate(300%) contrast(120%)";
+      break;
 
     case 'filter4': // pixelado
+      advancedControls.style.display = "none";
       startPixelatedEffect();
-    break;
+      break;
 
+    case 'filter5':
+      advancedControls.style.display = "block";
+      sliderLabel.textContent = "Intensidad Térmica";
+      video.style.filter = `invert(${value}%) hue-rotate(250deg) saturate(200%) contrast(150%)`;
+      break;
+
+    case 'filter6':
+      advancedControls.style.display = "block";
+      sliderLabel.textContent = "Intensidad de Ruido";
+      startNoiseEffect();
+      break;
   }
 
 }
@@ -162,6 +187,68 @@ function startPixelatedEffect() {
 
 }
 
+function startNoiseEffect() {
+  if (!video.videoWidth) {
+    setTimeout(startNoiseEffect, 100);
+    return;
+  }
+
+  let noiseCanvas = document.getElementById("displayCanvas");
+  if (!noiseCanvas) {
+    noiseCanvas = document.createElement("canvas");
+    noiseCanvas.id = "displayCanvas";
+    noiseCanvas.style.position = "absolute";
+    noiseCanvas.style.top = "0";
+    noiseCanvas.style.left = "0";
+    noiseCanvas.style.width = "100%";
+    noiseCanvas.style.height = "100%";
+    noiseCanvas.style.pointerEvents = "none";
+    noiseCanvas.style.zIndex = "2";
+    video.parentNode.appendChild(noiseCanvas);
+  }
+
+  const nCtx = noiseCanvas.getContext("2d", { willReadFrequently: true });
+  // Bajamos un poco la resolución del canvas de ruido para crear "grano" más grueso
+  noiseCanvas.width = video.videoWidth / 1.5; 
+  noiseCanvas.height = video.videoHeight / 1.5;
+
+  let frameCount = 0;
+
+  function processFrame() {
+    if (selectedFilter !== 'filter6') return;
+
+    // Solo actualizamos el ruido cada 2 frames para que se vea más como cine
+    if (frameCount % 2 === 0) {
+      const intensity = intensitySlider.value; //
+      const w = noiseCanvas.width;
+      const h = noiseCanvas.height;
+
+      nCtx.clearRect(0, 0, w, h);
+
+      const imageData = nCtx.createImageData(w, h);
+      const data = imageData.data;
+
+      for (let i = 0; i < data.length; i += 4) {
+        // Generamos un valor de gris
+        const value = Math.random() * 255;
+        
+        data[i] = value;     // Rojo
+        data[i + 1] = value; // Verde
+        data[i + 2] = value; // Azul
+        // La opacidad depende del slider y de un factor aleatorio para dar textura
+        data[i + 3] = Math.random() * (intensity * 0.8); 
+      }
+
+      nCtx.putImageData(imageData, 0, 0);
+    }
+
+    frameCount++;
+    animationFrame = requestAnimationFrame(processFrame);
+  }
+
+  processFrame();
+}
+
 function removeFilter(filter) {
   if (selectedFilter === filter) {
     // Deseleccionar el filtro
@@ -200,7 +287,7 @@ const videoContainer = document.getElementById("videoContainer");
 function formatTime(seconds) {
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
-  return `${mins.toString().padStart(2,"0")}:${secs.toString().padStart(2,"0")}`;
+  return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
 }
 
 playPauseBtn.addEventListener("click", () => {
